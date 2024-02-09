@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: uc3-dep
+  name: uc3-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uc3-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: uc3-dep
+    spec:
+      containers:
+      - image: localhost:5000/uc3
+        name: uc3
+        resources: {}
+status: {}
