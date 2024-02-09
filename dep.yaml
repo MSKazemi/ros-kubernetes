@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: decice-uc3
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +10,7 @@ metadata:
   labels:
     app: uc3-dep
   name: uc3-dep
+  namespace: decice-uc3
 spec:
   replicas: 1
   selector:
@@ -18,7 +24,8 @@ spec:
         app: uc3-dep
     spec:
       containers:
-      - image: localhost:5000/uc3
+      - image: kazemi/uc3
+        command: ["sleep", "3600"]
         name: uc3
         resources: {}
 status: {}
