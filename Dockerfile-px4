@@ -1,0 +1,20 @@
+FROM docker.io/px4io/px4-dev-ros2-foxy:latest
+
+#
+RUN apt-get update && apt-get upgrade -y 
+RUN apt install -y curl \ 
+    git
+RUN apt-get install -y python3-pip
+RUN pip install --upgrade pip 
+
+RUN mkdir -p ~/ros2_ws/src/
+WORKDIR ~/ros2_ws/src/
+# RUN git clone --recursive --branch uc3 git@gitlab-ce.gwdg.de:decice/decice-wp5.git .
+# RUN cp -r /path/to/decice-wp5/UC3_EmergencyResponse/* /path/to/ros2_ws/scr
+
+# Copy the directory from the host into the container
+COPY ./UC3_EmergencyResponse/*  ./
+
+# Install the Python dependencies
+RUN pip3 install -r ./requirements.txt
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
