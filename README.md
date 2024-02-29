@@ -126,3 +126,6 @@ flannel is CNI plugin for Kubernetes. But the problem with ROS is it is not supp
 ROS2 or DDS use multicast for service discovery.
 Wavenet is a CNI plugin for Kubernetes that supports multicast and UDP.
 
+
+
+

@@ -1,0 +1,61 @@
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: netmska
+#   labels:
+#     name: netmska
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-multicast
+spec:
+  podSelector:
+    matchLabels:
+      app: net-test
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: net-test
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: net-test
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: net-test
+  name: net-test
+  # namespace: netmska
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: net-test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: net-test
+    spec:
+      containers:
+      - image: ubuntu
+        name: ubuntu
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          apt-get update
+          apt-get install -y iproute2
+          apt-get install -y socat
+          apt-get install -y netcat
+          apt install -y iputils-ping
+          sleep infinity  # Add sleep infinity command
+        resources: {}
+status: {}
