@@ -10,6 +10,8 @@ The next step is adding new node and check the communication between the nodes.
 
 ## Docker
 
+
+
 ```
 docker build -t uc3 .
 
@@ -82,4 +84,45 @@ source ~/.bashrc
 ```
 
 
+# ROS2 - Today 2024-02-28
+I am try to learn ROS2 consepets and also how to use it in Docker and Kubernetes.
+I will start with Docker and then I will move to Kubernetes.
+I will use the following links:
+https://www.youtube.com/watch?v=3GbrKQ7G2P0&list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy&index=3
+
+So I should create workspace and then build it (create node) and source it in bashrc.
+ - create with `colcon build`
+ - `ros2 pkg create my_robot_controller --build-type ament_python --dependencies rclpy`  
+ - package can have many nodes.
+
+https://docs.ros.org/en/foxy/How-To-Guides/Run-2-nodes-in-single-or-separate-docker-containers.html 
+
+```
+docker pull osrf/ros:foxy-desktop
+docker run -it --name ros2 osrf/ros:foxy-desktop
+docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name ros3 osrf/ros:foxy-desktop
+```
+
+
+
+```
+apt update
+
+
+echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+
+apt install -y screen vim 
+
+echo "shell bash" >> ~/.screenrc
+
+
+ros2 run demo_nodes_cpp talker
+ros2 run demo_nodes_cpp listener
+rqt_graph
+ 
+```
+
+flannel is CNI plugin for Kubernetes. But the problem with ROS is it is not support multicast which use by ROS for service discovery. 
+ROS2 or DDS use multicast for service discovery.
+Wavenet is a CNI plugin for Kubernetes that supports multicast and UDP.
 
