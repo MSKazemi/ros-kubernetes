@@ -1,5 +1,16 @@
 # ROS2 in Kubernetes
 
+## Dashboard
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
 Steps:
 I will check the codes of Sebatiano in Docker using the  docker.io/px4io/px4-dev-ros2-foxy:latest image.
 The next step is to check the codes of Sebatiano in Kubernetes using the same image.

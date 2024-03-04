@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ros
+  name: ros
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ros
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ros
+    spec:
+      containers:
+      #- image: px4io/px4-dev-ros2-foxy # osrf/ros:foxy-desktop
+      - image: docker.io/osrf/ros:foxy-desktop
+
+        name: ros
+        resources: {}
+status: {}
