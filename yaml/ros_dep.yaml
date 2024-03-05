@@ -20,7 +20,9 @@ spec:
       containers:
       #- image: px4io/px4-dev-ros2-foxy # osrf/ros:foxy-desktop
       - image: docker.io/osrf/ros:foxy-desktop
-
         name: ros
+        command: 
+        - sleep
+        - "3600"
         resources: {}
 status: {}
