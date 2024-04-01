@@ -6,7 +6,7 @@ metadata:
     app: ros
   name: ros
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ros
@@ -21,8 +21,7 @@ spec:
       #- image: px4io/px4-dev-ros2-foxy # osrf/ros:foxy-desktop
       - image: docker.io/osrf/ros:foxy-desktop
         name: ros
-        command: 
-        - sleep
-        - "3600"
+        command: ["/bin/bash", "-c"]
+        args: ["source /opt/ros/foxy/setup.bash && sleep 3600"]
         resources: {}
 status: {}
